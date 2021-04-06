@@ -8,25 +8,34 @@
 import Foundation
 import UIKit
 
-/**
- Classe View Model que configura os dados do comprovante para a view
- */
 class ReceiptViewModel: ViewModelProtocol{
-    //MARK: - Instance properties
     
-    /// Model com o saldo atual
+    //MARK: - Instances
+    
     private var receipt = ReceiptModel() {
         didSet{
             reloadData()
         }
     }
     
-    //MARK: Init
-    init (receipt: ReceiptModel){
-        self.receipt = receipt
+    var typeTransaction: String?{
+        return receipt.description
+    }
+
+    var favored: String?{
+        return receipt.to
     }
     
-    /// Variável que formata a string do saldo para a visualização
+    var bank: String?{
+        return "Banco Phi"
+    }
+    
+    var authentication: String?{
+        return receipt.authentication
+    }
+    
+    var id: String?
+    
     var amount: String? {
         guard let amount = receipt.amount as NSNumber? else {return ""}
         let formatter = NumberFormatter()
@@ -36,7 +45,6 @@ class ReceiptViewModel: ViewModelProtocol{
         return amountFormatter
     }
     
-    /// Variável que formata a data da transação para a view
     var date: String?{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -46,37 +54,16 @@ class ReceiptViewModel: ViewModelProtocol{
         return newDate
     }
     
-    /// Variável que busca na model e retorna tipo da transação
-    var typeTransaction: String?{
-        return receipt.description
+    //MARK: Initializer
+    
+    init (receipt: ReceiptModel){
+        self.receipt = receipt
     }
-    
-    /// Variável que busca na model e retorna o favorecido na transação
-    var favored: String?{
-        return receipt.to
-    }
-    
-    /// Variável que retorna o nome da instituição bancária
-    var bank: String?{
-        return "Banco Phi"
-    }
-    
-    /// Variável que busca na model e retorna o código de autenticação
-    var authentication: String?{
-        return receipt.authentication
-    }
-    
-    /// Variável com o id da transação (utilizado para buscar o comprovante)
-    var id: String?
-    
     
     //MARK: Protocol Setup
     
-    // Closure Reload
     var reloadData = {() -> () in }
-    // Closure Error
     var errorMessage = {(error : Error) -> () in }
-    // Result Request
     var requestResult = "Loading"
     
     func getContentData(){

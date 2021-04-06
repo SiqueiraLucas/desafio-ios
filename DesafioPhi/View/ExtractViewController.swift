@@ -8,22 +8,15 @@
 import UIKit
 
 class ExtractViewController: UIViewController {
-    //MARK: Views
     
-    /// Botão que define a visibilidade do saldo
+    //MARK: Instances
+    
     @IBOutlet weak var eyeButton: UIButton!
-    /// Label com o texto do saldo
     @IBOutlet weak var balanceLabel: UILabel!
-    /// Table View com as movimentações financeiras
     @IBOutlet weak var tableView: UITableView!
-    /// Indicador de carregamento
     let activityIndicator = UIActivityIndicatorView()
     
-    //MARK: Instance properties
-    
-    /// View Model que configura o saldo para a view
     let balanceViewModel = BalanceViewModel(balance: BalanceModel())
-    /// View Model que configura os dados das transações para a view
     let extractViewModel = ExtractViewModel(extracts: [Item]())
     
     //MARK: Life Cycle
@@ -40,14 +33,10 @@ class ExtractViewController: UIViewController {
     
     //MARK: Functions
     
-    /**
-     Método acionado ao tocar no botão do olho
-     */
     @IBAction func eyeButtonAction(_ sender: Any) {
         balanceViewModel.hiddenAmount()
     }
     
-    //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow{
             let selectedRow = indexPath.row
@@ -61,11 +50,10 @@ class ExtractViewController: UIViewController {
 //MARK: Protocol Setup
 
 extension ExtractViewController: ViewControllerProtocol{
-    func setup(){
+    
+    func additionalSetup() {
         DataPersistence.shared.requestForLocation()
         tableViewSetup()
-        closureSetup()
-        getContentSetup()
     }
     
     func closureSetup()  {

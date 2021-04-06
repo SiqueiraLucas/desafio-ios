@@ -7,10 +7,6 @@
 
 import Foundation
 
-/**
- Classe model do saldo
- */
-class BalanceModel: Codable{
-    /// Saldo atual
+struct BalanceModel: Codable{
     var amount: Int?
 }

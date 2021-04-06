@@ -7,16 +7,14 @@
 
 import Foundation
 
-/// Classe que configura a persistência de dados
 class DataPersistence {
-    //MARK: - Instance properties
     
-    /// Sengleton da persistência de dados
+    //MARK: - Instances
+    
     static let shared = DataPersistence ()
 
-    //MARK: - Init
+    //MARK: - Initializer
     
-    // Inicializando os dados do User Defaults
     private init () {
         if !UserDefaults.standard.bool(forKey: "Initial"){
             saveLocalData(data: true, key: "Initial")
@@ -29,18 +27,10 @@ class DataPersistence {
     
     //MARK: Functions
     
-    /**
-     Método utilizado para inicializar o singleton
-     */
     func requestForLocation () {
        print("Acesso liberado!")
     }
     
-    /**
-     Method que salva algum valor no device
-     - parameter data: valor a ser salva
-     - parameter key: chave do valor
-    */
     func saveLocalData(data: Any?, key: String){
         UserDefaults.standard.set(data, forKey: key)
     }

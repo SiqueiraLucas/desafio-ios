@@ -9,11 +9,9 @@ import Foundation
 import UIKit
 
 extension ExtractViewController: UITableViewDelegate, UITableViewDataSource{
-    //MARK: Table View Setup
     
-    /**
-     Método que configura o delegate e data source da table view
-     */
+    //MARK: Setup
+    
     func tableViewSetup()  {
         tableView.dataSource = self
         tableView.delegate = self

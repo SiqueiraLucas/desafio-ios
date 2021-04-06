@@ -197,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				7F43982025FA392300B1C670 /* ExtractViewController.swift */,
+				7F6714B4261A7F260065DD1F /* Controller */,
 				7F81467925FE5F7B00F7CE1F /* ReceiptViewController.swift */,
 				7F38724625FDFF3800196C31 /* ExtractTableView.swift */,
 				7F43984025FA53CF00B1C670 /* TransactionsViewCell.swift */,
@@ -236,6 +237,13 @@
 				7F51CE2725FFBD4A00B29C9D /* Info.plist */,
 			);
 			path = DesafioPhiTests;
+			sourceTree = "<group>";
+		};
+		7F6714B4261A7F260065DD1F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		7FD5A46125FD458300C4E089 /* Utils */ = {

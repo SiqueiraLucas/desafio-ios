@@ -8,19 +8,14 @@
 import XCTest
 @testable import DesafioPhi
 
-/**
- Claase que testa a requisição à API pelas view models
- */
 class APIRequestTests: XCTestCase {
     
-    /// View model com o método de request
+    // MARK: Instances
+    
     var sut : ViewModelProtocol?
     
     // MARK: Test Request Balance
     
-    /**
-     Método que testa a reqeuisição do saldo
-    */
     func testRequestBalance(){
         // Arrange
         sut = BalanceViewModel(balance: BalanceModel())
@@ -40,9 +35,6 @@ class APIRequestTests: XCTestCase {
     
     // MARK: Test Request Extract
     
-    /**
-     Método que testa a reqeuisição do saldo
-    */
     func testRequestExtract(){
         // Arrange
         sut = ExtractViewModel(extracts: [Item]())
@@ -62,9 +54,6 @@ class APIRequestTests: XCTestCase {
     
     // MARK: Test Request Receipt
     
-    /**
-     Método que testa a reqeuisição do saldo
-    */
     func testRequestReceipt(){
         // Arrange
         sut = ReceiptViewModel(receipt: ReceiptModel())
