@@ -12,6 +12,7 @@ protocol ViewControllerProtocol {
     func closureSetup()
     func getContentSetup()
     func navigationControllerSetup()
+    func targetsSetup()
     func additionalSetup()
 }
 
@@ -19,6 +20,7 @@ extension ViewControllerProtocol{
     func setup(){
         closureSetup()
         getContentSetup()
+        targetsSetup()
         additionalSetup()
     }
 }

@@ -12,18 +12,15 @@ class ReceiptViewController: UIViewController {
     
     //MARK: Instances
     
-    @IBOutlet weak var typeTransaction: UILabel!
-    @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var favored: UILabel!
-    @IBOutlet weak var bank: UILabel!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var authentication: UILabel!
-    @IBOutlet weak var shareButton: UIButton!
-    
+    private let receiptView = ReceiptView(frame: UIScreen.main.bounds)
     let receiptViewModel = ReceiptViewModel(receipt: ReceiptModel())
     var sharePresenter: SharePresenterProtocol?
     
     //MARK: Life Cycle
+    
+    override func loadView() {
+        self.view = receiptView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +35,7 @@ class ReceiptViewController: UIViewController {
     
     //MARK: Functions
     
-    @IBAction func prepareShare(_ sender: Any) {
+    @objc func prepareShare(sender: UIButton!) {
         hideItems()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01, execute: share)
     }
@@ -48,8 +45,8 @@ class ReceiptViewController: UIViewController {
     }
     
     func hideItems(){
-        shareButton.isHidden = !shareButton.isHidden
-        if shareButton.isHidden{
+        receiptView.shareButton.isHidden = !receiptView.shareButton.isHidden
+        if receiptView.shareButton.isHidden{
             navigationController?.navigationBar.tintColor = .white
         }else{
             navigationController?.navigationBar.tintColor = UIColor(named: "BlackMainColor")
@@ -62,18 +59,23 @@ class ReceiptViewController: UIViewController {
 extension ReceiptViewController: ViewControllerProtocol{
     
     func additionalSetup() {
+        self.title = "Comprovante"
         sharePresenter = SharePresenter()
+    }
+    
+    func targetsSetup() {
+        receiptView.shareButton.addTarget(self, action: #selector(prepareShare), for: .touchUpInside)
     }
     
     func closureSetup()  {
         receiptViewModel.reloadData = { [weak self] ()  in
             DispatchQueue.main.async {
-                self?.typeTransaction.text = self?.receiptViewModel.typeTransaction
-                self?.amount.text = self?.receiptViewModel.amount
-                self?.favored.text = self?.receiptViewModel.favored
-                self?.bank.text = self?.receiptViewModel.bank
-                self?.date.text = self?.receiptViewModel.date
-                self?.authentication.text = self?.receiptViewModel.authentication
+                self?.receiptView.receiptContainer.typeTransaction.information.text = self?.receiptViewModel.typeTransaction
+                self?.receiptView.receiptContainer.amount.information.text = self?.receiptViewModel.amount
+                self?.receiptView.receiptContainer.favored.information.text = self?.receiptViewModel.favored
+                self?.receiptView.receiptContainer.bank.information.text = self?.receiptViewModel.bank
+                self?.receiptView.receiptContainer.date.information.text = self?.receiptViewModel.date
+                self?.receiptView.receiptContainer.authentication.information.text = self?.receiptViewModel.authentication
             }
         }
         receiptViewModel.errorMessage = { (error)  in
@@ -90,6 +92,7 @@ extension ReceiptViewController: ViewControllerProtocol{
     func navigationControllerSetup(){
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.tintColor = .greenMain
     }
     
 }

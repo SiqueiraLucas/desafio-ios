@@ -50,7 +50,6 @@ class BalanceViewModel: ViewModelProtocol{
     
     func hiddenAmount(){
         Preferences.shared.hideBalance = !Preferences.shared.hideBalance
-        DataPersistence.shared.saveLocalData(data: Preferences.shared.hideBalance, key: "Hidden")
         reloadData()
     }
     

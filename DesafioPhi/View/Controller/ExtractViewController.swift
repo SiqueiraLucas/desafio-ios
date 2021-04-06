@@ -11,15 +11,15 @@ class ExtractViewController: UIViewController {
     
     //MARK: Instances
     
-    @IBOutlet weak var eyeButton: UIButton!
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
-    
+    let extractView = ExtractView(frame: UIScreen.main.bounds)
     let balanceViewModel = BalanceViewModel(balance: BalanceModel())
     let extractViewModel = ExtractViewModel(extracts: [Item]())
     
     //MARK: Life Cycle
+    
+    override func loadView() {
+        self.view = extractView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,16 +33,8 @@ class ExtractViewController: UIViewController {
     
     //MARK: Functions
     
-    @IBAction func eyeButtonAction(_ sender: Any) {
+    @objc func eyeButtonAction(sender: UIButton!) {
         balanceViewModel.hiddenAmount()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let indexPath = tableView.indexPathForSelectedRow{
-            let selectedRow = indexPath.row
-            guard let destinationView = segue.destination as? ReceiptViewController else {return}
-            destinationView.receiptViewModel.id = self.extractViewModel.returnIdTransaction(index: selectedRow)
-        }
     }
 
 }
@@ -52,15 +44,19 @@ class ExtractViewController: UIViewController {
 extension ExtractViewController: ViewControllerProtocol{
     
     func additionalSetup() {
-        DataPersistence.shared.requestForLocation()
+        self.title = "Extrato"
         tableViewSetup()
+    }
+    
+    func targetsSetup() {
+        extractView.balanceView.eyeButton.addTarget(self, action: #selector(eyeButtonAction), for: .touchUpInside)
     }
     
     func closureSetup()  {
         balanceViewModel.reloadData = { [weak self] ()  in
             DispatchQueue.main.async {
-                self?.balanceLabel.text = self?.balanceViewModel.amount
-                self?.eyeButton.setImage(self?.balanceViewModel.eyeImage, for: .normal)
+                self?.extractView.balanceView.balanceLabel.text = self?.balanceViewModel.amount
+                self?.extractView.balanceView.eyeButton.setImage(self?.balanceViewModel.eyeImage, for: .normal)
             }
         }
         balanceViewModel.errorMessage = { (error)  in
@@ -70,7 +66,7 @@ extension ExtractViewController: ViewControllerProtocol{
         }
         extractViewModel.reloadData = { [weak self] ()  in
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self?.extractView.tableView.reloadData()
             }
         }
         extractViewModel.errorMessage = { (error)  in

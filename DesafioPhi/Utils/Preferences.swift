@@ -12,16 +12,22 @@ class Preferences{
     //MARK: - Instances
     
     static let shared = Preferences()
-    var hideBalance = false
+    
+    lazy var hideBalance: Bool = false{
+        didSet{
+            UserDefaults.standard.setValue(hideBalance, forKey: "Hidden")
+        }
+    }
     
     //MARK: Initializer
     
-    private init () {}
-    
-
-    //MARK: Function
-    
-    func requestForLocation () {
-        print("Acesso liberado!")
+    private init () {
+        if !UserDefaults.standard.bool(forKey: "Init"){
+            UserDefaults.standard.setValue(true, forKey: "Init")
+            hideBalance = false
+        }else{
+            hideBalance = UserDefaults.standard.bool(forKey: "Hidden")
+        }
     }
+    
 }

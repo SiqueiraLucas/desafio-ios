@@ -35,7 +35,6 @@ class BalanceViewModelTests: XCTestCase {
     func testHideBalance(){
         // Arrange
         model.amount = 100
-        Preferences.shared.requestForLocation()
         Preferences.shared.hideBalance = true
         sut = BalanceViewModel(balance: model)
         

@@ -13,11 +13,8 @@ extension ExtractViewController: UITableViewDelegate, UITableViewDataSource{
     //MARK: Setup
     
     func tableViewSetup()  {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.backgroundView = activityIndicator
-        activityIndicator.startAnimating()
+        extractView.tableView.dataSource = self
+        extractView.tableView.delegate = self
     }
     
     //MARK: Functions
@@ -28,13 +25,13 @@ extension ExtractViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TransactionsViewCell
-        cell.typeTransaction.text = extractViewModel.returnTypeTransaction(index: indexPath.row)
-        cell.favored.text = extractViewModel.returnFavored(index: indexPath.row)
-        cell.date.text = extractViewModel.returnDate(index: indexPath.row)
-        cell.pix.isHidden = !extractViewModel.returnPix(index: indexPath.row)
-        cell.amount.text = extractViewModel.returnAmount(index: indexPath.row)
+        cell.textContainer.typeTransaction.text = extractViewModel.returnTypeTransaction(index: indexPath.row)
+        cell.textContainer.favored.text = extractViewModel.returnFavored(index: indexPath.row)
+        cell.informationContainer.date.text = extractViewModel.returnDate(index: indexPath.row)
+        cell.informationContainer.pix.isHidden = !extractViewModel.returnPix(index: indexPath.row)
+        cell.textContainer.amount.text = extractViewModel.returnAmount(index: indexPath.row)
+        cell.timelineView.activeCustomConstraint = indexPath.row == 0 ? true : false
         cell.backgroundColor = extractViewModel.returnPix(index: indexPath.row) == true ? UIColor(named: "WhiteMainColor") : UIColor.white
-        cell.lineConstraint.constant = indexPath.row == 0 ? 20 : 0
         
         return cell
     }
@@ -43,5 +40,11 @@ extension ExtractViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.row == extractViewModel.countItems - 5 {
             extractViewModel.getContentData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextViewController = ReceiptViewController()
+        nextViewController.receiptViewModel.id = self.extractViewModel.returnIdTransaction(index: indexPath.row)
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
