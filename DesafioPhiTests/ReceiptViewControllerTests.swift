@@ -14,7 +14,7 @@ class ReceiptViewControllerTests: XCTestCase {
     
     func testLoading() {
         // Arrange
-        guard let sut = getViewController() else { return }
+        let sut = ReceiptViewController()
             
         // Act
         _ = sut.view
@@ -27,7 +27,7 @@ class ReceiptViewControllerTests: XCTestCase {
     
     func testSharePresenter() {
         // Arrange
-        guard let sut = getViewController() else { return }
+        let sut = ReceiptViewController()
         let sharePresenter = SharePresenterMock()
         sut.sharePresenter = sharePresenter
 
@@ -44,26 +44,16 @@ class ReceiptViewControllerTests: XCTestCase {
     
     func testHideShareButton() {
         // Arrange
-        guard let sut = getViewController() else { return }
+        let sut = ReceiptViewController()
         _ = sut.view
-        sut.prepareShare(sut)
+        sut.prepareShare(sender: nil)
 
         // Act
-        let value = sut.shareButton.isHidden
+        let value = sut.receiptView.shareButton.isHidden
 
         // Assert
         XCTAssertTrue(value, "O botão de compartilhar não está oculto")
 
-    }
-    
-    // MARK: Get ViewController
-    
-    func getViewController() -> ReceiptViewController? {
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExtractVC") as? ReceiptViewController else {
-            XCTAssert(false, "A view controller 'ExtractVC' não foi identificada")
-            return nil
-        }
-        return vc
     }
 
 }

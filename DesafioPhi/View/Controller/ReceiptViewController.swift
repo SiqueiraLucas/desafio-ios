@@ -12,7 +12,7 @@ class ReceiptViewController: UIViewController {
     
     //MARK: Instances
     
-    private let receiptView = ReceiptView(frame: UIScreen.main.bounds)
+    let receiptView = ReceiptView(frame: UIScreen.main.bounds)
     let receiptViewModel = ReceiptViewModel(receipt: ReceiptModel())
     var sharePresenter: SharePresenterProtocol?
     
@@ -35,7 +35,7 @@ class ReceiptViewController: UIViewController {
     
     //MARK: Functions
     
-    @objc func prepareShare(sender: UIButton!) {
+    @objc func prepareShare(sender: UIButton?) {
         hideItems()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01, execute: share)
     }
