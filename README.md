@@ -1,16 +1,10 @@
-# Desafio iOS - Phi
----
-![Banner Phi](assets/20200826084504887_picture.jpg)
-
-## Olá, ficamos felizes por você participar do nosso desafio iOS!
-
+# Desafio iOS - Bank
 ---
 
-## Como será seu desafio
+## Como será o desafio
 
-Utilizando a nossa [API](https://desafio-mobile-bff.herokuapp.com/), você deverá criar uma app que apresente o saldo e as movimentações financeiras de um usuário, uma tela com os detalhes da movimentação selecionada e a opção de compartilhamento do mesmo. O layout deverá ser semelhante ao apresentado neste `README`. Legal, certo?
+Utilizando a [API BANK](https://desafio-mobile-bff.herokuapp.com/), você deverá criar uma app que apresente o saldo e as movimentações financeiras de um usuário, uma tela com os detalhes da movimentação selecionada e a opção de compartilhamento do mesmo.
 
-Pense no desafio como uma oportunidade de mostrar todo o seu conhecimento. Faça-o com calma! Você pode combinar o tempo com nosso time de RH!
 Vamos avaliar como você lida com as seguintes situações:
 
 - Consumo de APIs;
@@ -66,12 +60,12 @@ Token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI
 ![ColorPallet](assets/CollorPallet.png)
 
 
-<img src="assets/iPhone X, XS, 11 Pro – 1.png"
-alt="" width="375" height="812" border="1" /> | <img src="assets/iPhone X, XS, 11 Pro – 2.png"
+<img src="assets/iPhone X, XS, 11 Pro – 0.png"
+alt="" width="375" height="812" border="1" /> | <img src="assets/iPhone X, XS, 11 Pro – 1.png"
 alt="" width="375" height="812" border="1" />
 
-<img src="assets/iPhone X, XS, 11 Pro – 3.png"
-alt="" width="375" height="812" border="1" /> | <img src="assets/iPhone X, XS, 11 Pro – 4.png"
+<img src="assets/iPhone X, XS, 11 Pro – 2.png"
+alt="" width="375" height="812" border="1" /> | <img src="assets/iPhone X, XS, 11 Pro – 3.png"
 alt="Compartilhamento" width="375" height="812" border="1" />
 
 ### Imagem a ser compartilhada:
